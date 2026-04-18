@@ -62,11 +62,10 @@ export default function Home() {
     <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center space-y-4 mb-12">
         <h1 className="text-3xl font-bold tracking-tight">
-          Explore any claim
+          Bayes as a Service
         </h1>
         <p className="text-muted text-lg">
-          Enter a claim to investigate. The system will decompose it, find
-          evidence, and compute a Bayesian posterior.
+          Type in a claim for investigation.
         </p>
       </div>
 
@@ -88,6 +87,9 @@ export default function Home() {
           </button>
         </div>
       </form>
+      <p className="text-muted text-sm mt-4">
+        *N.B.: despite efforts explicitly to the contrary, current results may feature extensive motivated reasoning.
+      </p>
 
       {error && (
         <div className="mt-4 rounded-lg border border-negative/20 bg-negative/5 px-4 py-3 text-sm text-negative">

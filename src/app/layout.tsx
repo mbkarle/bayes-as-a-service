@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bayesian Argument Map",
+  title: "Bayes as a Service",
   description:
-    "Explore claims through structured Bayesian reasoning with quantified evidence.",
+    "Is it epistemic rigor or cognitive offloading?",
 };
 
 export default function RootLayout({
@@ -37,7 +37,7 @@ export default function RootLayout({
                 href="/"
                 className="text-lg font-semibold tracking-tight"
               >
-                Bayesian Argument Map
+                Bayes as a Service
               </Link>
               <nav className="flex items-center gap-4">
                 <Link

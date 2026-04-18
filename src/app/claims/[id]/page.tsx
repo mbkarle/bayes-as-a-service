@@ -130,7 +130,7 @@ export default function ClaimDetailPage() {
       </div>
 
       {/* Actions */}
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap items-start gap-3">
         <InvestigationDialog claimId={id} onComplete={() => loadData()} />
         <Link
           href={`/claims/${id}/audit`}
