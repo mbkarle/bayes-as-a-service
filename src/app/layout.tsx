@@ -39,6 +39,14 @@ export default function RootLayout({
               >
                 Bayesian Argument Map
               </Link>
+              <nav className="flex items-center gap-4">
+                <Link
+                  href="/graph"
+                  className="text-sm text-zinc-600 transition-colors hover:text-foreground dark:text-zinc-400"
+                >
+                  Graph Explorer
+                </Link>
+              </nav>
             </div>
           </div>
         </header>

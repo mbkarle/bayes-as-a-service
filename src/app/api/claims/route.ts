@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServiceClient } from "@/lib/supabase/server";
 import { getDefaultPerspectiveId } from "@/lib/supabase/perspective";
+import { embedOne } from "@/lib/embedding";
 
 export async function POST(request: NextRequest) {
   const supabase = createServiceClient();
@@ -38,10 +39,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: nodeError.message }, { status: 500 });
   }
 
-  // Create claim metadata (embedding will be populated by the LLM integration layer)
+  // Create claim metadata with embedding
+  let embedding: number[] | null = null;
+  try {
+    embedding = await embedOne(text);
+  } catch (e) {
+    console.warn("Failed to generate embedding:", e);
+  }
+
   const { error: metaError } = await supabase.from("claim_metadata").insert({
     node_id: node.id,
     domain_tags: domain_tags ?? [],
+    ...(embedding ? { embedding: `[${embedding.join(",")}]` } : {}),
   });
 
   if (metaError) {

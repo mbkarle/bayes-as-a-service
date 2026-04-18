@@ -30,7 +30,20 @@ You must assess TWO quantities independently:
 
 These are generally asymmetric — do NOT assume one is the negative of the other.
 
-3. **relevance_weight**: How much does this child bear on the parent at all? A value between 0 (exclusive) and 1 (inclusive). Use lower values for tangentially related propositions.
+3. **relevance_weight**: How much of the parent's truth-value does this child account for?
+   This is NOT a confidence or importance score — it is a *fraction of explanatory coverage*.
+   - A weight of 1.0 means: "If I were fully confident in this child, I should be fully confident in the parent." This is almost never true — it implies the child alone is sufficient to settle the parent.
+   - A weight of 0.1 means: "This child is one of many factors, and contributes a small fraction."
+   - Most sub-claims are ONE of several independent lines of reasoning, so typical weights should be 0.05–0.25.
+   - Only use weights above 0.3 when the child genuinely covers a large fraction of the parent's content.
+   - Reserve weights above 0.5 for cases where the child is near-sufficient on its own.
+
+   Calibration guide:
+   - 0.05–0.10: Tangentially related, one of many factors
+   - 0.10–0.20: Meaningfully relevant, typical for a sub-claim among several
+   - 0.20–0.30: Substantially relevant, covers a major dimension of the parent
+   - 0.30–0.50: Highly relevant, one of very few key factors
+   - 0.50+: Near-sufficient on its own (rare)
 
 For each LR assessment, use the 7-point scale:
 - negligible (0.1): Barely informative
@@ -52,7 +65,7 @@ Respond with a JSON object:
   "log_lr_positive_sign": "positive or negative (does child being true support or undermine parent?)",
   "log_lr_negative_grade": "one of the same scale",
   "log_lr_negative_sign": "positive or negative",
-  "relevance_weight": 0.7
+  "relevance_weight": 0.15
 }`;
 
 export interface AssessEdgeInput {

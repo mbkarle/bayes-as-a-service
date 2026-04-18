@@ -124,3 +124,23 @@ export function patchEdge(
 export function fetchEvidenceMetadata(nodeId: string) {
   return fetchJSON<EvidenceMetadata>(`/api/evidence/${nodeId}/metadata`);
 }
+
+export interface GraphResponse {
+  nodes: NodeSummary[];
+  edges: Array<{
+    id: string;
+    parent_id: string;
+    child_id: string;
+    log_lr_positive: number;
+    log_lr_negative: number;
+    relevance_weight: number;
+    reasoning: string | null;
+  }>;
+  total: number;
+  limit: number;
+  offset: number;
+}
+
+export function fetchGraph(limit = 200, offset = 0) {
+  return fetchJSON<GraphResponse>(`/api/graph?limit=${limit}&offset=${offset}`);
+}
